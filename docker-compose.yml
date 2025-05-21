@@ -1,0 +1,17 @@
+
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: agendamento-notificacoes
+    restart: always
+    environment:
+      - MYSQL_DATABASE=agendamento-notificacoes
+      - MYSQL_ROOT_PASSWORD=123
+    ports:
+      - '3306:3306'
+    volumes:
+      - volume:/var/lib/mysql
+volumes:
+  volume:
+    driver: local
