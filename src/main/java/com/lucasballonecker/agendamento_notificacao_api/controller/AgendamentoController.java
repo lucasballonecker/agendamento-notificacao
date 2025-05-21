@@ -17,12 +17,18 @@ public class AgendamentoController {
 
     @PostMapping
     public ResponseEntity<AgendamentoDtoOut> gravarAgendamentos(@RequestBody AgendamentoDtoIn agendamento) {
-        AgendamentoDtoOut agendamentoDtoOut = agendamentoService.gravarAgendamento(agendamento);
+        AgendamentoDtoOut agendamentoDtoOut = agendamentoService.gravarAgendamentos(agendamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(agendamentoDtoOut);
     }
 
     @GetMapping("/{id}")
-    public  ResponseEntity<AgendamentoDtoOut> buscarAgendamentosPorId(@PathVariable Long id) {
+    public ResponseEntity<AgendamentoDtoOut> buscarAgendamentosPorId(@PathVariable Long id) {
         return ResponseEntity.ok(agendamentoService.buscarAgendamentosPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> cancelarAgendamentosPorId(@PathVariable Long id) {
+        agendamentoService.cancelarAgendamentosPorId(id);
+        return ResponseEntity.ok().build();
     }
 }

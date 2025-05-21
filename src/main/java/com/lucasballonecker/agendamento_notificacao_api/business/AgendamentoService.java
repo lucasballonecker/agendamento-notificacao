@@ -18,7 +18,7 @@ public class AgendamentoService {
     private final AgendamentoRepository repository;
     private final IAgendamentoMapper agendamentoMapper;
 
-    public AgendamentoDtoOut gravarAgendamento(AgendamentoDtoIn agendamento) {
+    public AgendamentoDtoOut gravarAgendamentos(AgendamentoDtoIn agendamento) {
         Agendamento agendamentoSalvo = agendamentoMapper.paraEntity(agendamento);
         repository.save(agendamentoSalvo);
         return agendamentoMapper.paraOut(agendamentoSalvo);
@@ -28,6 +28,12 @@ public class AgendamentoService {
         Agendamento agendamento = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Id não encontrado"));
         return agendamentoMapper.paraOut(agendamento);
+    }
+
+    public void cancelarAgendamentosPorId(Long id) {
+        Agendamento agendamento = repository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Id não encontrado"));
+        repository.save(agendamentoMapper.paraEntityCancelamento(agendamento));
     }
 
 }
