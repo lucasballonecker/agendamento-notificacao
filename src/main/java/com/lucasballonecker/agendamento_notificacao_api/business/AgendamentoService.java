@@ -26,7 +26,7 @@ public class AgendamentoService {
 
     public AgendamentoDtoOut buscarAgendamentosPorId(Long id) {
         Agendamento agendamento = repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Id não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Erro: id não encontrado"));
         return agendamentoMapper.paraOut(agendamento);
     }
 
